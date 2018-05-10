@@ -9,10 +9,7 @@ from os import listdir
 from os.path import isfile
 import importlib
 
-#from highlife import *
-
 cellular_automata = None
-
 
 class Grid():
     def __init__(self, num_cells_x, num_cells_y, cell_size):
@@ -91,7 +88,7 @@ def main():
     global cellular_automata
 
     parser = argparse.ArgumentParser(description='Application that simulates different cellular automaton')
-    parser.add_argument('-c', '--cellular-automaton', help='Which cellular automaton to launch', required=False, default="gameoflife")
+    parser.add_argument('-c', '--cellular-automaton', help='Name of the cellular automata to launch', required=False, default="gameoflife")
     parser.add_argument('-s', '--grid-size', help='Size of the grid to use', required=False, default=30, type=int)
     args = parser.parse_args()
 
