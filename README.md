@@ -1,10 +1,15 @@
 # Cellular Automata
-Simple and extensible python cellular automaton
+Simple and extensible python cellular automaton. The rules included are: [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), [highlife](https://en.wikipedia.org/wiki/Highlife_(cellular_automaton)), and [wireworld](https://en.wikipedia.org/wiki/Wireworld).
+
+![wireworld](wireworld_example.gif)
 
 # Requirements
 - [python 3](https://www.python.org/)
 - [pygame](https://www.pygame.org/)
 
+    ```
+    pip3 install pygame
+    ```
 # Usage
 Clone or download the repository, and launch cellular_automata.py :
 ```
