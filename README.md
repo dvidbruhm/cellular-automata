@@ -1,7 +1,10 @@
 # Cellular Automata
 Simple and extensible python cellular automaton. The rules included are: [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), [highlife](https://en.wikipedia.org/wiki/Highlife_(cellular_automaton)), and [wireworld](https://en.wikipedia.org/wiki/Wireworld).
 
-![wireworld](wireworld_example.gif)
+<p align="center">
+  <img src="wireworld_example.gif" width="300" heigth="300"/>
+</p>
+
 
 # Requirements
 - [python 3](https://www.python.org/)
