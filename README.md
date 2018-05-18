@@ -39,6 +39,6 @@ For example, to launch with a grid size of 30 and with the "highlife" rules :
 ```
 python cellular_automata.py -s 30 -c highlife
 ```
-
+Note: no need to enter ".py" at the end for the rules name.
 # Write your own cellular automata
 It is very easy to implement your own set of rules for the cellular automata. All you have to do is create a python file that implements 3 things: an enum with all the possible cell states, a dictionnary with the color you want for each cell states and the "next_cell_state(cell, neighbors)" function that takes the cell and a list of its neighbors and returns the state that the cell will take for the next step. There are already a couple of simple examples to base a new cellular automata on.
