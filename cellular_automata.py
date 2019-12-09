@@ -8,6 +8,7 @@ import argparse
 from os import listdir
 from os.path import isfile
 import importlib
+import random
 
 cellular_automata = None
 
@@ -15,12 +16,12 @@ class Grid():
     def __init__(self, num_cells_x, num_cells_y, cell_size):
         global cellular_automata
         self.size = num_cells_x
-        self.cells = [[Cell(i, j, cell_size, cellular_automata.CellState(0)) for j in range(num_cells_y)] for i in range(num_cells_x)]
+        self.cells = [[Cell(i, j, cell_size, cellular_automata.CellState(random.randint(0, len(list(cellular_automata.CellState))-1))) for j in range(num_cells_y)] for i in range(num_cells_x)]
         
     def draw(self, screen):
         for cell_row in self.cells:
             for cell in cell_row:
-                cell.draw(screen)
+                cell.draw(screen, self)
         
         pygame.display.flip()
                 
@@ -41,26 +42,23 @@ class Cell():
         self.size = size
         self.state = state
         
-    def draw(self, screen):
+    def draw(self, screen, grid):
         global cellular_automata
-        rect_border = pygame.Rect(self.x * self.size, self.y * self.size, self.size, self.size)
-        rect_fill = pygame.Rect(self.x * self.size + 1, self.y * self.size + 1, self.size - 2, self.size - 2)
+        if grid.size < 100:
+            rect_fill = pygame.Rect(self.x * self.size + 1, self.y * self.size + 1, self.size - 2, self.size - 2)
+        else:
+            rect_fill = pygame.Rect(self.x * self.size, self.y * self.size, self.size, self.size)
         
-        pygame.draw.rect(screen, pygame.Color(255,255,255,1), rect_border)
         pygame.draw.rect(screen, cellular_automata.colors[self.state], rect_fill)
 
     def get_neighbors(self, grid):
         neighbors = []
         for i in range(-1, 2):
             for j in range(-1, 2):
-                neighbor_x = i + self.x
-                neighbor_y = j + self.y
-                if ((i, j) != (0, 0) and
-                    neighbor_x >= 0 and neighbor_x < grid.size and 
-                    neighbor_y >= 0 and neighbor_y < grid.size):
-                    
-                    neighbors.append(grid.cells[neighbor_x][neighbor_y])
-
+                neighbor_x = (i + self.x) % grid.size
+                neighbor_y = (j + self.y) % grid.size
+                neighbors.append(grid.cells[neighbor_x][neighbor_y])
+        neighbors.remove(self)
         return neighbors
         
 def count_neighbors_of_state(neighbors, state):
@@ -126,7 +124,7 @@ def main():
             grid.update()
             grid.draw(screen)
 
-            pygame.time.delay(200)
+            pygame.time.delay(20)
         else:
             for event in events:
                 if event.type == pygame.MOUSEBUTTONDOWN and (pygame.mouse.get_pressed()[0] or pygame.mouse.get_pressed()[2]):
